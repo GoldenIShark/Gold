@@ -1,4 +1,4 @@
-const API = "https://4e5e4809-2156-449e-aa26-3e6605bbda59-00-tp0i6bl5yt5f.pike.replit.dev";
+aconst API = "https://4e5e4809-2156-449e-aa26-3e6605bbda59-00-tp0i6bl5yt5f.pike.replit.dev";
 
 // COOKIE
 function setCookie(name, value, days) {
