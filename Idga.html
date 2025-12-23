@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>GoldenShark Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="login">
+  <h2>Login Chat</h2>
+  <input id="name" placeholder="Nama">
+  <button onclick="login()">Masuk</button>
+  <p id="error"></p>
+</div>
+
+<div id="chat" style="display:none;">
+  <ul id="messages"></ul>
+
+  <div class="send-box">
+    <input id="msg" placeholder="Pesan">
+    <button onclick="send()">Kirim</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+                          </html>
