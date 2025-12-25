@@ -34,9 +34,39 @@ header {
 }
 
 @keyframes gradientMove {
-  0% { background-position: 0% 100%; }
-  50% { background-position: 100% 0%; }
-  100% { background-position: 0% 100%; }
+0% {
+background-position: 0% 100%;
+transform: scale(1) rotate(0deg);
+}
+
+40% {
+transform: scale(1) rotate(0deg);
+}
+
+42% {
+transform: scale(1.1) rotate(2deg);
+}
+
+44% {
+transform: scale(1.1) rotate(-2deg);
+}
+
+46% {
+transform: scale(1.1) rotate(2deg);
+}
+
+48% {
+transform: scale(1.1) rotate(-2deg);
+}
+
+50% {
+background-position: 100% 0%;
+transform: scale(1) rotate(0deg);
+} /* ← INI YANG KURANG */
+
+100% {
+background-position: 0% 100%;
+transform: scale(1) rotate(0deg);
 }
 
 .wave {
