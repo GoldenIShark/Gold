@@ -28,7 +28,7 @@ function login() {
       setCookie("NamaUser", name, 7);
       startChat();
       serverDown = true;
-      systemMessage("⚠️ sistem server off (tidak aktif), coba lain kali");
+      systemMessage("⚠️ server sedang mode SAD, cobalah kembali lain waktu \n server mungkin sedang memulihkan perasaan.");
     });
 }
 
@@ -55,7 +55,7 @@ function send() {
     .catch(() => {
       if (!serverDown) {
         serverDown = true;
-        systemMessage("⚠️ pesan gagal dikirim, server tidak aktif");
+        systemMessage("⚠️ pesan gagal dikirim\nmungkin server sudah tidak menerima anda\n harap coba lain waktu");
       }
     });
 }
@@ -78,7 +78,8 @@ function loadMessages() {
     .then(res => res.json())
     .then(data => {
       const ul = document.getElementById("messages");
- ul.querySelectorAll("li:not([data-system])").forEach(li => li.remove());
+
+      ul.querySelectorAll("li:not([data-system])").forEach(li => li.remove());
 
       serverDown = false;
 
@@ -97,7 +98,7 @@ function loadMessages() {
     .catch(() => {
       if (!serverDown) {
         serverDown = true;
-        systemMessage("⚠️ sistem server off (tidak aktif), coba lain kali");
+        systemMessage("⚠️ server sedang mode SAD, cobalah kembali lain waktu \n server mungkin sedang memulihkan perasaan.");
       }
     });
 }
