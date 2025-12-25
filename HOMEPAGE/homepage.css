@@ -62,7 +62,7 @@ transform: scale(1.1) rotate(-2deg);
 50% {
 background-position: 100% 0%;
 transform: scale(1) rotate(0deg);
-} /* ← INI YANG KURANG */
+}
 
 100% {
 background-position: 0% 100%;
