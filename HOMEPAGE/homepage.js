@@ -102,7 +102,7 @@ function loadMessages() {
     });
 }
 
-setInterval(loadMessages, 10000);
+setInterval(loadMessages, 4000);
 
 if (getCookie("NamaUser")) {
   startChat();
