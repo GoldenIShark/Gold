@@ -14,7 +14,14 @@ html, body {
 header {
   position: relative;
   height: 100px;
-  background-color: #385368;
+  background: linear-gradient(
+    to bottom,
+    #008CFF,
+    #4EAFFF,
+    #8DCBFF,
+    #9AD2FF,
+    #FFF2DF
+  );: ;
   overflow: hidden;
 }
 
@@ -25,7 +32,7 @@ header {
   font-family: 'Cinzel', serif;
   font-size: 28px;
 
-  background: linear-gradient(45deg, #ffcc70, #c850c0, #4158d0);
+  background: linear-gradient(45deg, #FF8A00, #c850c0, #4158d0, #FF0700, #12FF00);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -36,28 +43,28 @@ header {
 @keyframes gradientMove {
   0% {
     background-position: 0% 100%;
-    transform: scale(1) rotate(0deg);
+    transform: translateY(0) scale(1) rotate(0deg);
   }
 
   40% {
-    transform: scale(1) rotate(0deg);
+    transform: translateY(0) scale(1) rotate(0deg);
   }
 
   42% {
-    transform: scale(1.1) rotate(2deg);
+    transform: translateY(-15px) scale(1.1) rotate(2deg);
   }
   44% {
-    transform: scale(1.1) rotate(-2deg);
+    transform: translateY(-15px) scale(1.1) rotate(-2deg);
   }
   46% {
-    transform: scale(1.1) rotate(2deg);
+    transform: translateY(-15px) scale(1.1) rotate(2deg);
   }
   48% {
-    transform: scale(1.1) rotate(-2deg);
+    transform: translateY(-15px) scale(1.1) rotate(-2deg);
   }
   50% {
     background-position: 100% 0%;
-    transform: scale(1) rotate(0deg);
+    transform: translateY(0) scale(1) rotate(0deg);
   }
 
   100% {
@@ -121,7 +128,7 @@ header {
 .chat-box {
   width: 90vw;
   max-width: 420px;
-  transform: translateY(-10vh);
+  transform: translateY(-5vh);
   height: 70vh;
   background: rgba(0,0,0,0.45);
   border-radius: 14px;
@@ -180,6 +187,7 @@ header {
   padding: 10px;
   border-radius: 6px;
   border: none;
+  animation: gradientMove1 8s ease infinite;
 }
 
 .send-box button {
@@ -188,4 +196,37 @@ header {
   border: none;
   background: #38bdf8;
   font-weight: bold;
+  animation: gradientMove1 8s ease infinite;
+}
+@keyframes gradientMove1 {
+  0% {
+    background-position: 0% 100%;
+    transform: scale(1) rotate(0deg);
+  }
+
+  40% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  42% {
+    transform: scale(1.03) rotate(2deg);
+  }
+  44% {
+    transform: scale(1.03) rotate(-2deg);
+  }
+  46% {
+    transform: scale(1.03) rotate(2deg);
+  }
+  48% {
+    transform: scale(1.03) rotate(-2deg);
+  }
+  50% {
+    background-position: 100% 0%;
+    transform: scale(1) rotate(0deg);
+  }
+
+  100% {
+    background-position: 0% 100%;
+    transform: scale(1) rotate(0deg);
+  }
 }
