@@ -83,7 +83,7 @@ header {
 
 .wave path {
   fill: rgba(95,168,211,0.75);
-  animation: waveMove 1.2s linear infinite;
+  animation: waveMove 1s linear infinite;
 }
 
 @keyframes waveMove {
