@@ -1,0 +1,164 @@
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #144368;
+}
+
+header {
+  position: relative;
+  height: 100px;
+  background-color: #385368;
+  overflow: hidden;
+}
+
+.judul {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+
+  background: linear-gradient(45deg, #ffcc70, #c850c0, #4158d0);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: gradientMove 8s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 100%; }
+  50% { background-position: 100% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 50px;
+}
+
+.wave path {
+  fill: rgba(95,168,211,0.75);
+  animation: waveMove 1.2s linear infinite;
+}
+
+@keyframes waveMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.ocean {
+  width: 100%;
+  height: calc(100vh - 100px);
+  background: linear-gradient(
+    to bottom,
+    #5fa8d3bf,
+    #2a5b83,
+    #224b6b,
+    #152e42,
+    #050b10
+  );
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#login {
+  text-align: center;
+}
+
+#login input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+#login button {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #38bdf8;
+  font-weight: bold;
+}
+.chat-box {
+  width: 90vw;
+  max-width: 420px;
+
+  height: 70vh;
+  background: rgba(0,0,0,0.45);
+  border-radius: 14px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#messages li.system {
+  text-align: center;
+  color: #ccc;
+  font-size: 12px;
+  margin: 10px 0;
+}
+
+#messages {
+  flex: 1; 
+  overflow-y: auto;
+  list-style: none;
+  padding: 12px;
+  margin: 0;
+}
+
+#messages li {
+  background: #020617;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+#messages small {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+#messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+#messages::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+
+.send-box {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(0,0,0,0.6);
+}
+
+.send-box input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+.send-box button {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #38bdf8;
+  font-weight: bold;
+}
