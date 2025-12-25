@@ -21,7 +21,7 @@ header {
     #8DCBFF,
     #9AD2FF,
     #FFF2DF
-  );: ;
+  );
   overflow: hidden;
 }
 
@@ -51,16 +51,16 @@ header {
   }
 
   42% {
-    transform: translateY(-15px) scale(1.1) rotate(2deg);
+    transform: translateY(-5px) scale(1.03) rotate(2deg);
   }
   44% {
-    transform: translateY(-15px) scale(1.1) rotate(-2deg);
+    transform: translateY(-5px) scale(1.03) rotate(-2deg);
   }
   46% {
-    transform: translateY(-15px) scale(1.1) rotate(2deg);
+    transform: translateY(-5px) scale(1.03) rotate(2deg);
   }
   48% {
-    transform: translateY(-15px) scale(1.1) rotate(-2deg);
+    transform: translateY(-5px) scale(1.03) rotate(-2deg);
   }
   50% {
     background-position: 100% 0%;
@@ -83,7 +83,7 @@ header {
 
 .wave path {
   fill: rgba(95,168,211,0.75);
-  animation: waveMove 1s linear infinite;
+  animation: waveMove 3s linear infinite;
 }
 
 @keyframes waveMove {
@@ -92,6 +92,7 @@ header {
 }
 
 .ocean {
+  position: relative;
   width: 100%;
   height: calc(100vh - 100px);
   background: linear-gradient(
@@ -204,22 +205,13 @@ header {
     transform: scale(1) rotate(0deg);
   }
 
-  40% {
-    transform: scale(1) rotate(0deg);
-  }
+  40% { transform: scale(1) rotate(0deg); }
 
-  42% {
-    transform: scale(1.03) rotate(2deg);
-  }
-  44% {
-    transform: scale(1.03) rotate(-2deg);
-  }
-  46% {
-    transform: scale(1.03) rotate(2deg);
-  }
-  48% {
-    transform: scale(1.03) rotate(-2deg);
-  }
+  42% { transform: scale(1.03) rotate(2deg); }
+  44% { transform: scale(1.03) rotate(-2deg); }
+  46% { transform: scale(1.03) rotate(2deg); }
+  48% { transform: scale(1.03) rotate(-2deg); }
+
   50% {
     background-position: 100% 0%;
     transform: scale(1) rotate(0deg);
@@ -229,4 +221,98 @@ header {
     background-position: 0% 100%;
     transform: scale(1) rotate(0deg);
   }
+}
+.ship {
+  position: absolute;
+  bottom: 12px;
+  left: -120px;
+  width: 90px;
+  pointer-events: none;
+
+  animation: shipWave 36s linear infinite;
+  animation-direction: 5s;
+}
+@keyframes shipWave {  
+  0% {  
+    transform: translateX(0) translateY(0);  
+  }  
+  5% {  
+    transform: translateX(12vw) translateY(-2px);  
+  }  
+  15% {  
+    transform: translateX(24vw) translateY(0);  
+  }  
+  20% {  
+    transform: translateX(36vw) translateY(-2px);  
+  }  
+  25% {  
+    transform: translateX(48vw) translateY(0);  
+  }  
+  30% {  
+    transform: translateX(60vw) translateY(-2px);  
+  }  
+  35% {  
+    transform: translateX(75vw) translateY(0);  
+  }  
+  40% {  
+    transform: translateX(87vw) translateY(-2px);  
+  }  
+  45% {  
+    transform: translateX(99vw) translateY(0);  
+  }  
+  50% {  
+    transform: translateX(115vw) translateY(-2px);  
+  }  
+  100% {  
+    transform: translateX(220vw) translateY(0);  
+  }  
+}
+.cloud {
+  position: absolute;
+  top: 40px;
+  width: 140px;
+  height: auto;
+  fill: rgba(255,255,255,0.9);
+  pointer-events: none;
+  filter: blur(0.3px);
+}
+
+
+.cloud-1 {
+  left: -160px;
+  top: -15px;
+  animation: cloudMove1 30s linear infinite;
+}
+
+
+.cloud-2 {
+  left: -200px;
+  top: -10px;
+  width: 110px;
+  opacity: 0.85;
+  animation: cloudMove2 50s linear infinite;
+}
+
+
+.cloud-3 {
+  right: -200px;
+  top: -25px;
+  width: 160px;
+  opacity: 0.8;
+  animation: cloudMove3 60s linear infinite;
+}
+
+@keyframes cloudMove1 {
+  from { transform: translateX(0); }
+  to   { transform: translateX(120vw); }
+}
+
+@keyframes cloudMove2 {
+  from { transform: translateX(0); }
+  to   { transform: translateX(130vw); }
+}
+
+@keyframes cloudMove3 {
+  from { transform: translateX(0) scaleX(-1); }
+  to   { transform: translateX(-130vw) scaleX(-1); }
 }
