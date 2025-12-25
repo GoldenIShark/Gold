@@ -121,7 +121,7 @@ header {
 .chat-box {
   width: 90vw;
   max-width: 420px;
-
+  transform: translateY(-10vh);
   height: 70vh;
   background: rgba(0,0,0,0.45);
   border-radius: 14px;
