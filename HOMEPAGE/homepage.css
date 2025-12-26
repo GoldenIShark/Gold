@@ -28,6 +28,11 @@ header {
   overflow: hidden;
 }
 
+#p_gender, #p_status, #p_hobby, #p_age {
+    background-color: black;
+    blend-mode: difference;
+}
+
 .judul {
   position: absolute;
   top: 20px;
