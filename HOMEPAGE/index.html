@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoldenShark Chat</title>
+  <title>ℋᎾℳℰ ℙᎯᎶℰ</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="homepage.css?v2">
+  <link rel="stylesheet" href="homepage.css">
 </head>
 
 <body>
-
-<header>
+  <div id="device-block">
+    <h2>website INI BISA DI AKSES KHUSUS HP</h2>
+    <p>Silakan buka website ini menggunakan smartphone atau matikan situs desktop</p>
+  </div>
+  <div id="app">
+    <header>
   <div class="judul">GoldenShark</div>
 
   <svg viewBox="0 0 1200 100" preserveAspectRatio="none" class="wave">  
@@ -40,11 +44,16 @@
       <ellipse cx="65" cy="25" rx="25" ry="20"/>
       <ellipse cx="85" cy="35" rx="30" ry="18"/>
   </svg>
+  <button class="containerm" type="submit"></button>
 </header>
-
-<main class="ocean">
+    <main class="ocean">
   
-</svg>
+  <div class="UIbawah">
+    <button class="ui-btn chat" onclick="toggleChat()">💬 OBROLAN</button>
+    <button class="ui-btn home" onclick="goHome()">🏠 RUMAH</button>
+    <button class="ui-btn profile" onclick="toggleProfile()">👤 PROFILE</button>
+  </div>
+  
   <div id="login">
     <h3>Masukkan Nama</h3>
     <input id="name" placeholder="Nama kamu">
@@ -52,7 +61,7 @@
     <p id="error"></p>
   </div>
 
-  <div id="chat" style="display:none;">
+  <div id="chat">
     <div class="chat-box">
 
       <ul id="messages"></ul>
@@ -61,12 +70,44 @@
         <input id="msg" placeholder="Ketik pesan...">
         <button onclick="send()">Kirim</button>
       </div>
-
     </div>
   </div>
+  
+  <div id="profile" class="profile-box">
+    <h3>👤 Profil</h3>
 
+    <div class="profile-field">
+      <label>Nama</label>
+      <input id="p_name" type="text" placeholder="Belum diisi">
+    </div>
+
+    <div class="profile-field">
+      <label>Status</label>
+      <input id="p_status" type="text" placeholder="Belum diisi">
+    </div>
+
+    <div class="profile-field">
+      <label>Hobi</label>
+      <input id="p_hobby" type="text" placeholder="Belum diisi">
+    </div>
+
+    <div class="profile-field">
+      <label>Umur</label>
+      <input id="p_age" type="number" placeholder="Belum diisi">
+    </div>
+
+    <div class="profile-field">
+      <label>Jenis Kelamin</label>
+      <select id="p_gender">
+        <option value="">Belum dipilih</option>
+        <option>Laki-laki</option>
+        <option>Perempuan</option>
+      </select>
+    </div>
+    <button id="SVProfile" onclick="saveProfile()">💾 Simpan Profil</button>
+  </div>
 </main>
-
-<script src="homepage.js?v2"></script>
+  </div>
+<script src="homepage.js?v3"></script>
 </body>
 </html>
