@@ -30,6 +30,7 @@ header {
 
 #p_gender, #p_status, #p_hobby, #p_age {
     background-color: black;
+    color: white;
     blend-mode: difference;
 }
 
