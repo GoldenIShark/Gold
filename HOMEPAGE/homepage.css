@@ -10,6 +10,9 @@ html, body {
   font-family: Arial, sans-serif;
   background-color: #144368;
 }
+body {
+  blend-mode: difference;
+}
 select {
     color: white;
     mix-blend-mode: difference;
@@ -28,10 +31,6 @@ header {
   overflow: hidden;
 }
 
-#p_gender, #p_status, #p_hobby, #p_age {
-    background-color: black;
-    color: white;
-    blend-mode: difference;
 }
 
 .judul {
