@@ -8,6 +8,64 @@ function setCookie(name, value, days) {
   document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
 }
 
+function toggleChat() {
+  const chat = document.getElementById("chat");
+  const profile = document.getElementById("profile");
+  const btnChat = document.querySelector(".ui-btn.chat");
+  const btnProfile = document.querySelector(".ui-btn.profile");
+
+  chat.classList.toggle("active");
+  profile.classList.remove("active");
+
+  btnChat.classList.toggle("active");
+  btnProfile.classList.remove("active");
+}
+
+function goHome() {
+  alert("SAAT INI BELUM ADA HALAMAN HOME");
+}
+
+
+function toggleProfile() {
+  const profile = document.getElementById("profile");
+  const chat = document.getElementById("chat");
+  const btnProfile = document.querySelector(".ui-btn.profile");
+  const btnChat = document.querySelector(".ui-btn.chat");
+
+  profile.classList.toggle("active");
+  chat.classList.remove("active");
+
+  btnProfile.classList.toggle("active");
+  btnChat.classList.remove("active");
+}
+
+function loadProfile() {
+  document.getElementById("p_name").value =
+    localStorage.getItem("p_name") || "";
+
+  document.getElementById("p_status").value =
+    localStorage.getItem("p_status") || "";
+
+  document.getElementById("p_hobby").value =
+    localStorage.getItem("p_hobby") || "";
+
+  document.getElementById("p_age").value =
+    localStorage.getItem("p_age") || "";
+
+  document.getElementById("p_gender").value =
+    localStorage.getItem("p_gender") || "";
+}
+
+function saveProfile() {
+  localStorage.setItem("p_name", document.getElementById("p_name").value);
+  localStorage.setItem("p_status", document.getElementById("p_status").value);
+  localStorage.setItem("p_hobby", document.getElementById("p_hobby").value);
+  localStorage.setItem("p_age", document.getElementById("p_age").value);
+  localStorage.setItem("p_gender", document.getElementById("p_gender").value);
+
+  alert("Profil disimpan ✅");
+}
+
 function getCookie(name) {
   return document.cookie
     .split("; ")
@@ -34,7 +92,9 @@ function login() {
 
 function startChat() {
   document.getElementById("login").style.display = "none";
-  document.getElementById("chat").style.display = "block";
+  document.getElementById("chat").classList.add("active");
+
+  loadProfile();
   loadMessages();
 }
 
