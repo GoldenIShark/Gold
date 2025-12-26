@@ -10,7 +10,10 @@ html, body {
   font-family: Arial, sans-serif;
   background-color: #144368;
 }
-
+select {
+    color: white;
+    mix-blend-mode: difference;
+}
 header {
   position: relative;
   height: 100px;
@@ -129,11 +132,12 @@ header {
 .chat-box {
   width: 90vw;
   max-width: 420px;
-  transform: translateY(-5vh);
+  transform: translateY(-10vh);
   height: 70vh;
+  border-radius: 16px;
   background: rgba(0,0,0,0.45);
-  border-radius: 14px;
-
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -207,10 +211,10 @@ header {
 
   40% { transform: scale(1) rotate(0deg); }
 
-  42% { transform: scale(1.03) rotate(2deg); }
-  44% { transform: scale(1.03) rotate(-2deg); }
-  46% { transform: scale(1.03) rotate(2deg); }
-  48% { transform: scale(1.03) rotate(-2deg); }
+  42% { transform: scale(1.01) rotate(1deg); }
+  44% { transform: scale(1.01) rotate(-1deg); }
+  46% { transform: scale(1.01) rotate(1deg); }
+  48% { transform: scale(1.01) rotate(-1deg); }
 
   50% {
     background-position: 100% 0%;
@@ -315,4 +319,193 @@ header {
 @keyframes cloudMove3 {
   from { transform: translateX(0) scaleX(-1); }
   to   { transform: translateX(-130vw) scaleX(-1); }
+}
+.containerm {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.containerm:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+#chat {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  
+}
+
+#chat.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 5;
+}
+
+.UIbawah {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(10, 30, 50, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  z-index: 999;
+}
+.ui-btn {
+  padding: 10px 14px;
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: all 1.25s ease;
+}
+
+.ui-btn:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+}
+
+.ui-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+.ui-btn.chat.active {
+  transform: translateY(-4px) scale(1.05);
+  background: #38bdf8;
+  color: #020617;
+  box-shadow: 0 10px 24px rgba(56,189,248,0.6);
+}
+.ui-btn.profile.active {
+  transform: translateY(-4px) scale(1.05);
+  background: #38bdf8;
+  color: #020617;
+  box-shadow: 0 10px 24px rgba(56,189,248,0.6);
+}
+/* PROFIL */
+#profile {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  bottom: 300px;
+  transition: opacity 0.3s ease;
+  z-index: 6;
+}
+
+#profile.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.profile-item span {
+  opacity: 0.7;
+}
+
+.profile-item strong {
+  font-weight: 600;
+}
+
+
+.profile-box {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  width: 90%;
+  max-width: 400px;
+
+  background: rgba(20, 67, 104, 0.9);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  padding: 16px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.profile-box.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.profile-field {
+  margin-bottom: 10px;
+}
+
+.profile-field label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.profile-field input,
+.profile-field select {
+  background-color: black;
+  width: 100%;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  margin-top: 4px;
+  opacity: 0.8;
+}
+#SVProfile {
+  background: rgba(20, 67, 104, 0.9);
+  background-color: black;
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  height: 30px;
+}
+#p_gender {
+    background-color: black;
+}
+#device-block {
+  position: fixed;
+  inset: 0;
+  background: #020617;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  z-index: 99999;
+  padding: 20px;
+}
+#app {
+  display: none;
+}
+@media (max-width: 480px) {
+  #device-block {
+    display: none;
+  }
+
+  #app {
+    display: block;
+  }
 }
