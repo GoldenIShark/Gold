@@ -1,69 +1,89 @@
 const API = "https://4e5e4809-2156-449e-aa26-3e6605bbda59-00-tp0i6bl5yt5f.pike.replit.dev";
 
 let serverDown = false;
+let isAnimating = false;
+
+const chatBox = document.getElementById("chat");
+const profileBox = document.getElementById("profile");
+
+const btnChat = document.querySelector(".ui-btn.chat");
+const btnProfile = document.querySelector(".ui-btn.profile");
+
+window.addEventListener("load", () => {
+  chatBox.classList.add("active");
+  btnChat.classList.add("active");
+});
+
+function toggleChat() {
+  if (isAnimating) return;
+  isAnimating = true;
+
+  if (profileBox.classList.contains("active")) {
+    profileBox.classList.remove("active");
+    profileBox.classList.add("closing");
+    btnProfile.classList.remove("active");
+
+    setTimeout(() => {
+      profileBox.classList.remove("closing");
+    }, 2000);
+  }
+
+  if (chatBox.classList.contains("active")) {
+    chatBox.classList.remove("active");
+    chatBox.classList.add("closing");
+    btnChat.classList.remove("active");
+
+    setTimeout(() => {
+      chatBox.classList.remove("closing");
+      isAnimating = false;
+    }, 2000);
+  } else {
+    chatBox.classList.add("active");
+    btnChat.classList.add("active");
+
+    setTimeout(() => {
+      isAnimating = false;
+    }, 2000);
+  }
+}
+
+function toggleProfile() {
+  if (isAnimating) return;
+  isAnimating = true;
+
+  if (chatBox.classList.contains("active")) {
+    chatBox.classList.remove("active");
+    chatBox.classList.add("closing");
+    btnChat.classList.remove("active");
+
+    setTimeout(() => {
+      chatBox.classList.remove("closing");
+    }, 2000);
+  }
+
+  if (profileBox.classList.contains("active")) {
+    profileBox.classList.remove("active");
+    profileBox.classList.add("closing");
+    btnProfile.classList.remove("active");
+
+    setTimeout(() => {
+      profileBox.classList.remove("closing");
+      isAnimating = false;
+    }, 2000);
+  } else {
+    profileBox.classList.add("active");
+    btnProfile.classList.add("active");
+
+    setTimeout(() => {
+      isAnimating = false;
+    }, 2000);
+  }
+}
 
 function setCookie(name, value, days) {
   const d = new Date();
   d.setTime(d.getTime() + days * 86400000);
   document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
-}
-
-function toggleChat() {
-  const chat = document.getElementById("chat");
-  const profile = document.getElementById("profile");
-  const btnChat = document.querySelector(".ui-btn.chat");
-  const btnProfile = document.querySelector(".ui-btn.profile");
-
-  chat.classList.toggle("active");
-  profile.classList.remove("active");
-
-  btnChat.classList.toggle("active");
-  btnProfile.classList.remove("active");
-}
-
-function goHome() {
-  alert("SAAT INI BELUM ADA HALAMAN HOME");
-}
-
-
-function toggleProfile() {
-  const profile = document.getElementById("profile");
-  const chat = document.getElementById("chat");
-  const btnProfile = document.querySelector(".ui-btn.profile");
-  const btnChat = document.querySelector(".ui-btn.chat");
-
-  profile.classList.toggle("active");
-  chat.classList.remove("active");
-
-  btnProfile.classList.toggle("active");
-  btnChat.classList.remove("active");
-}
-
-function loadProfile() {
-  document.getElementById("p_name").value =
-    localStorage.getItem("p_name") || "";
-
-  document.getElementById("p_status").value =
-    localStorage.getItem("p_status") || "";
-
-  document.getElementById("p_hobby").value =
-    localStorage.getItem("p_hobby") || "";
-
-  document.getElementById("p_age").value =
-    localStorage.getItem("p_age") || "";
-
-  document.getElementById("p_gender").value =
-    localStorage.getItem("p_gender") || "";
-}
-
-function saveProfile() {
-  localStorage.setItem("p_name", document.getElementById("p_name").value);
-  localStorage.setItem("p_status", document.getElementById("p_status").value);
-  localStorage.setItem("p_hobby", document.getElementById("p_hobby").value);
-  localStorage.setItem("p_age", document.getElementById("p_age").value);
-  localStorage.setItem("p_gender", document.getElementById("p_gender").value);
-
-  alert("Profil disimpan ✅");
 }
 
 function getCookie(name) {
@@ -86,13 +106,14 @@ function login() {
       setCookie("NamaUser", name, 7);
       startChat();
       serverDown = true;
-      systemMessage("⚠️ server sedang mode SAD, cobalah kembali lain waktu \n server mungkin sedang memulihkan perasaan.");
+      systemMessage("⚠️ Server sedang offline");
     });
 }
 
 function startChat() {
   document.getElementById("login").style.display = "none";
-  document.getElementById("chat").classList.add("active");
+  chatBox.classList.add("active");
+  btnChat.classList.add("active");
 
   loadProfile();
   loadMessages();
@@ -115,7 +136,7 @@ function send() {
     .catch(() => {
       if (!serverDown) {
         serverDown = true;
-        systemMessage("⚠️ pesan gagal dikirim\nmungkin server sudah tidak menerima anda\n harap coba lain waktu");
+        systemMessage("⚠️ Pesan gagal dikirim");
       }
     });
 }
@@ -129,7 +150,6 @@ function systemMessage(text) {
   li.dataset.system = "true";
   li.innerHTML = `<i>${text}</i>`;
   ul.appendChild(li);
-
   ul.scrollTop = ul.scrollHeight;
 }
 
@@ -138,7 +158,6 @@ function loadMessages() {
     .then(res => res.json())
     .then(data => {
       const ul = document.getElementById("messages");
-
       ul.querySelectorAll("li:not([data-system])").forEach(li => li.remove());
 
       serverDown = false;
@@ -158,13 +177,32 @@ function loadMessages() {
     .catch(() => {
       if (!serverDown) {
         serverDown = true;
-        systemMessage("⚠️ server sedang mode SAD, cobalah kembali lain waktu \n server mungkin sedang memulihkan perasaan.");
+        systemMessage("⚠️ Server tidak merespons");
       }
     });
 }
 
 setInterval(loadMessages, 4000);
 
+function loadProfile() {
+  ["name","status","hobby","age","gender"].forEach(f => {
+    const el = document.getElementById("p_" + f);
+    if (el) el.value = localStorage.getItem("p_" + f) || "";
+  });
+}
+
+function saveProfile() {
+  ["name","status","hobby","age","gender"].forEach(f => {
+    const el = document.getElementById("p_" + f);
+    if (el) localStorage.setItem("p_" + f, el.value);
+  });
+  alert("Profil disimpan");
+}
+
 if (getCookie("NamaUser")) {
   startChat();
+}
+
+function goHome() {
+  alert("Halaman Home belum tersedia");
 }
