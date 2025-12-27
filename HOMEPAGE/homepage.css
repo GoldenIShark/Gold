@@ -376,11 +376,15 @@ header {
 }
 
 .UIbawah {
+  height: 70px;
+  width: 100%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 14px;
   position: fixed;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -389,7 +393,7 @@ header {
 .ui-btn {
   padding: 10px 14px;
   border-radius: 14px;
-
+  margin: 20px;
   background: rgba(255,255,255,0.15);
   border: 1px solid rgba(255,255,255,0.25);
   color: white;
