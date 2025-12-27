@@ -10,10 +10,6 @@ html, body {
   font-family: Arial, sans-serif;
   background-color: #144368;
 }
-select {
-    color: white;
-    mix-blend-mode: difference;
-}
 header {
   position: relative;
   height: 100px;
@@ -28,6 +24,8 @@ header {
   overflow: hidden;
 }
 
+:root {
+  color-scheme: light;
 }
 
 .judul {
@@ -234,9 +232,7 @@ header {
   left: -120px;
   width: 90px;
   pointer-events: none;
-
   animation: shipWave 36s linear infinite;
-  animation-direction: 5s;
 }
 @keyframes shipWave {  
   0% {  
@@ -339,18 +335,43 @@ header {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
 }
+
 #chat {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
-  position: absolute;
-  
+  transform: rotate(90deg) translateX(20%) translateY(200px);
 }
 
 #chat.active {
-  opacity: 1;
   pointer-events: auto;
-  z-index: 5;
+  animation: chatFadeIn 2s ease forwards;
+}
+
+#chat.closing {
+  pointer-events: none;
+  animation: chatFadeOut 2s ease forwards;
+}
+
+@keyframes chatFadeIn {
+  from {
+    opacity: 0;
+    transform: rotate(90deg) translateX(-100%) translateY(800px) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) translateX(0) translateY(0) scale(1);
+  }
+}
+
+@keyframes chatFadeOut {
+  from {
+    opacity: 1;
+    transform: rotate(0deg) translateX(0) translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: rotate(90deg) translateX(20%) translateY(800px) scale(0);
+  }
 }
 
 .UIbawah {
@@ -362,13 +383,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  background: rgba(10, 30, 50, 0.6);
-  backdrop-filter: blur(8px);
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.2);
-  z-index: 999;
 }
 .ui-btn {
   padding: 10px 14px;
@@ -405,20 +419,6 @@ header {
   color: #020617;
   box-shadow: 0 10px 24px rgba(56,189,248,0.6);
 }
-/* PROFIL */
-#profile {
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  bottom: 300px;
-  transition: opacity 0.3s ease;
-  z-index: 6;
-}
-
-#profile.active {
-  opacity: 1;
-  pointer-events: auto;
-}
 
 .profile-item span {
   opacity: 0.7;
@@ -428,12 +428,10 @@ header {
   font-weight: 600;
 }
 
-
 .profile-box {
   position: absolute;
-  bottom: 90px;
+  bottom: 300px;
   left: 50%;
-  transform: translateX(-50%) translateY(20px);
   width: 90%;
   max-width: 400px;
 
@@ -441,17 +439,44 @@ header {
   backdrop-filter: blur(8px);
   border-radius: 18px;
   padding: 16px;
-
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
   color: white;
+
+  pointer-events: none;
+  opacity: 0;
+
+  transform: rotate(-90deg) translateX(-20%) translateY(200px);
 }
 
 .profile-box.active {
-  opacity: 1;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+  animation: slideFadeUp 2s ease forwards;
+}
+
+.profile-box.closing {
+  pointer-events: none;
+  animation: slideFadeDown 2s ease forwards;
+}
+
+@keyframes slideFadeUp {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) translateX(-20%) translateY(200px) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes slideFadeDown {
+  from {
+    opacity: 1;
+    transform: rotate(0deg) translateX(-50%) translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: rotate(-90deg) translateX(-20%) translateY(200px) scale(0);
+  }
 }
 
 .profile-field {
@@ -466,7 +491,6 @@ header {
 .profile-field input,
 .profile-field select {
   background-color: black;
-  blend-mode: difference;
   width: 100%;
   padding: 8px;
   border-radius: 10px;
@@ -477,13 +501,20 @@ header {
 }
 #SVProfile {
   background: rgba(20, 67, 104, 0.9);
-  background-color: black;
+  background: #0b1220;
+  color: #ffffff;
   backdrop-filter: blur(8px);
   border-radius: 18px;
   height: 30px;
 }
-#p_gender {
-    background-color: black;
+#profile input,
+#profile select {
+  background: #0b1220;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+#profile input::placeholder {
+  color: rgba(255,255,255,0.6);
 }
 #device-block {
   position: fixed;
