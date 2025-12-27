@@ -131,9 +131,9 @@ header {
 }
 .chat-box {
   width: 90vw;
+  margin-bottom: 170px;
   max-width: 420px;
-  transform: translateY(-10vh);
-  height: 70vh;
+  height: calc(100vh - 250px);
   border-radius: 16px;
   background: rgba(0,0,0,0.45);
   border: 1px solid rgba(255,255,255,0.22);
@@ -141,6 +141,7 @@ header {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  z-index: 0;
 }
 
 #messages li.system {
@@ -383,6 +384,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 9999;
 }
 .ui-btn {
   padding: 10px 14px;
