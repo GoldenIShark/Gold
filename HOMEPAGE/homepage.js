@@ -1,5 +1,3 @@
-const API = "https://4e5e4809-2156-449e-aa26-3e6605bbda59-00-tp0i6bl5yt5f.pike.replit.dev";
-
 let serverDown = false;
 let isAnimating = false;
 
@@ -80,44 +78,22 @@ function toggleProfile() {
   }
 }
 
-function setCookie(name, value, days) {
-  const d = new Date();
-  d.setTime(d.getTime() + days * 86400000);
-  document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
-}
-
-function getCookie(name) {
-  return document.cookie
-    .split("; ")
-    .find(r => r.startsWith(name + "="))
-    ?.split("=")[1];
-}
+/* ================= LOGIN ================= */
 
 function login() {
-  const name = document.getElementById("name").value.trim();
-  if (!name) return;
+  const username = document.getElementById("name").value.trim();
+  if (!username) return alert("Nama tidak boleh kosong");
 
-  fetch(API + "/ping")
-    .then(() => {
-      setCookie("NamaUser", name, 7);
-      startChat();
-    })
-    .catch(() => {
-      setCookie("NamaUser", name, 7);
-      startChat();
-      serverDown = true;
-      systemMessage("⚠️ Server sedang offline");
-    });
+  setCookie("username", username);
+  startChat();
 }
 
 function startChat() {
   document.getElementById("login").style.display = "none";
-  chatBox.classList.add("active");
-  btnChat.classList.add("active");
-
-  loadProfile();
   loadMessages();
 }
+
+/* ================= CHAT ================= */
 
 function send() {
   const msg = document.getElementById("msg").value.trim();
@@ -129,38 +105,36 @@ function send() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, message: msg })
   })
-    .then(() => {
+    .then(res => {
+      if (!res.ok) throw new Error("Send failed");
       document.getElementById("msg").value = "";
-      setTimeout(loadMessages, 150);
+      loadMessages();
     })
     .catch(() => {
       if (!serverDown) {
         serverDown = true;
-        systemMessage("⚠️ Pesan gagal dikirim");
+        systemMessage("⚠️ Pesan gagal dikirim (server offline)");
       }
     });
 }
 
-function systemMessage(text) {
-  const ul = document.getElementById("messages");
-  if (!ul) return;
-
-  const li = document.createElement("li");
-  li.className = "system";
-  li.dataset.system = "true";
-  li.innerHTML = `<i>${text}</i>`;
-  ul.appendChild(li);
-  ul.scrollTop = ul.scrollHeight;
-}
-
 function loadMessages() {
   fetch(API + "/messages")
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error("Server error");
+      return res.json();
+    })
     .then(data => {
       const ul = document.getElementById("messages");
-      ul.querySelectorAll("li:not([data-system])").forEach(li => li.remove());
 
-      serverDown = false;
+      // hapus pesan lama (kecuali system)
+      ul.querySelectorAll("li:not(.system)").forEach(li => li.remove());
+
+      // kalau server tadi mati → beri pesan online
+      if (serverDown) {
+        systemMessage("✅ Server kembali online");
+        serverDown = false;
+      }
 
       data.forEach(m => {
         const li = document.createElement("li");
@@ -177,32 +151,33 @@ function loadMessages() {
     .catch(() => {
       if (!serverDown) {
         serverDown = true;
-        systemMessage("⚠️ Server tidak merespons");
+        systemMessage("⚠️ Server tidak aktif / offline");
       }
     });
 }
 
+function systemMessage(text) {
+  const ul = document.getElementById("messages");
+  if (!ul) return;
+
+  // Cegah pesan sistem dobel
+  if ([...ul.children].some(li => li.dataset.system === text)) return;
+
+  const li = document.createElement("li");
+  li.className = "system";
+  li.dataset.system = text;
+  li.innerHTML = `<i>${text}</i>`;
+  ul.appendChild(li);
+
+  ul.scrollTop = ul.scrollHeight;
+}
+
+function gohome() {
+    alert("home belum tersedia");
+}
+
 setInterval(loadMessages, 4000);
 
-function loadProfile() {
-  ["name","status","hobby","age","gender"].forEach(f => {
-    const el = document.getElementById("p_" + f);
-    if (el) el.value = localStorage.getItem("p_" + f) || "";
-  });
-}
-
-function saveProfile() {
-  ["name","status","hobby","age","gender"].forEach(f => {
-    const el = document.getElementById("p_" + f);
-    if (el) localStorage.setItem("p_" + f, el.value);
-  });
-  alert("Profil disimpan");
-}
-
-if (getCookie("NamaUser")) {
+if (getCookie("username")) {
   startChat();
-}
-
-function goHome() {
-  alert("Halaman Home belum tersedia");
 }
