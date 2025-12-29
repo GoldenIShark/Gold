@@ -138,7 +138,7 @@ Notification.requestPermission().then(permission => {
     getToken(messaging, {
       vapidKey: "BBJHJdzjvyzGsGcZrWv2p91QVIBwpKhRmLLFrSfAxs6Wel5Mi2VE8hDbBEOdP4jFRCJpsYlCWybE4rLxYk4N92o"
     }).then(token => {
-      console.log("FCM TOKEN:", token);
+      alert("FCM TOKEN:\n" + token);
     });
   }
 });
