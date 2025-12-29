@@ -12,7 +12,7 @@ html, body {
 }
 header {
   position: relative;
-  height: 100px;
+  height: 200px;
   background: linear-gradient(
     to bottom,
     #008CFF,
@@ -97,7 +97,7 @@ header {
 .ocean {
   position: relative;
   width: 100%;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 180px);
   background: linear-gradient(
     to bottom,
     #5fa8d3bf,
@@ -131,9 +131,9 @@ header {
 }
 .chat-box {
   width: 90vw;
-  margin-bottom: 170px;
+  margin-bottom: 240px;
   max-width: 420px;
-  height: calc(100vh - 250px);
+  height: calc(100vh - 350px);
   border-radius: 16px;
   background: rgba(0,0,0,0.45);
   border: 1px solid rgba(255,255,255,0.22);
@@ -505,7 +505,28 @@ header {
   margin-top: 4px;
   opacity: 0.8;
 }
+.Tprofile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
 #SVProfile {
+  background: rgba(20, 67, 104, 0.9);
+  background: #0b1220;
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  height: 30px;
+  margin: 14px;
+}
+#btnprofile {
+    align-items: center;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.25);
+    border-radius: 14px;
+}
+#GProfile {
   background: rgba(20, 67, 104, 0.9);
   background: #0b1220;
   color: #ffffff;
