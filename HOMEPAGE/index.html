@@ -7,7 +7,7 @@
   <title>ᎶᎾℒⅅℰℕЅℋᎯℛᏦ</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v2">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -112,10 +112,42 @@
     </div>
   </main>
   </div>
-  <script>
-      const API = "https://4e5e4809-2156-449e-aa26-3e6605bbda59-00-tp0i6bl5yt5f.pike.replit.dev";
-  </script>
-  <script src="data.js"></script>
-  <script src="base.js"></script>
+  <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging.js";
+
+const firebaseConfig = {
+  apiKey: "API_KEY_KAMU",
+  authDomain: "PROJECT_ID.firebaseapp.com",
+  projectId: "PROJECT_ID",
+  messagingSenderId: "SENDER_ID",
+  appId: "APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
+
+// REGISTER SERVICE WORKER
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/firebase-messaging-sw.js");
+}
+
+// REQUEST PERMISSION + TOKEN
+Notification.requestPermission().then(permission => {
+  if (permission === "granted") {
+    getToken(messaging, {
+      vapidKey: "BBJHJdzjvyzGsGcZrWv2p91QVIBwpKhRmLLFrSfAxs6Wel5Mi2VE8hDbBEOdP4jFRCJpsYlCWybE4rLxYk4N92o"
+    }).then(token => {
+      console.log("FCM TOKEN:", token);
+    });
+  }
+});
+</script>
+
+<script>
+  const API = "https://4e5e4809-2156-449e-aa26-3e6605bbda59-00-tp0i6bl5yt5f.pike.replit.dev";
+</script>
+<script src="data.js"></script>
+<script src="base.js"></script>
 </body>
 </html>
