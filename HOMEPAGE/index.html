@@ -7,7 +7,7 @@
   <title>ᎶᎾℒⅅℰℕЅℋᎯℛᏦ</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="homepage.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -49,66 +49,73 @@
 </header>
     <main class="ocean">
   
-  <div class="UIbawah">
-    <button class="ui-btn chat" onclick="toggleChat()">💬 OBROLAN</button>
-    <button class="ui-btn home" onclick="goHome()">🏠 RUMAH</button>
-    <button class="ui-btn profile" onclick="toggleProfile()">👤 PROFILE</button>
-  </div>
+    <div class="UIbawah">
+      <button class="ui-btn chat" onclick="toggleChat()">💬 OBROLAN</button>
+      <button class="ui-btn home" onclick="goHome()">🏠 RUMAH</button>
+      <button class="ui-btn profile" onclick="toggleProfile()">👤 PROFILE</button>
+    </div>
   
-  <div id="login">
-    <h3>Masukkan Nama</h3>
-    <input id="name" placeholder="Nama kamu">
-    <button onclick="login()">Masuk</button>
-    <p id="error"></p>
-  </div>
+    <div id="login">
+      <h3>Masukkan user</h3>
+      <input id="name" placeholder="user kamu">
+      <button onclick="login()">Masuk</button>
+      <p id="error"></p>
+    </div>
 
-  <div id="chat">
-    <div class="chat-box">
+    <div id="chat">
+      <div class="chat-box">
 
-      <ul id="messages"></ul>
+        <ul id="messages"></ul>
 
-      <div class="send-box">
-        <input id="msg" placeholder="Ketik pesan...">
-        <button onclick="send()">Kirim</button>
+        <div class="send-box">
+          <input id="msg" placeholder="Ketik pesan...">
+          <button onclick="send()">Kirim</button>
+        </div>
       </div>
     </div>
+
+    <div id="profile" class="profile-box">
+      <h3>👤 Profil</h3>
+
+      <div class="profile-field">
+        <label>Nama</label>
+        <input id="p_name" type="text" placeholder="Belum diisi">
+      </div>
+
+      <div class="profile-field">
+        <label>Status</label>
+        <input id="p_setatus" type="text" placeholder="Belum diisi">
+      </div>
+      <div class="profile-field">
+        <label>Hobi</label>
+        <input id="p_hobby" type="text" placeholder="Belum diisi">
+      </div>
+
+      <div class="profile-field">
+        <label>Umur</label>
+        <input id="p_age" type="number" placeholder="Belum diisi">
+      </div>
+
+      <div class="profile-field">
+        <label>Jenis Kelamin</label>
+        <select id="p_gender">
+          <option value="">Belum dipilih</option>
+          <option>Laki-laki</option>
+          <option>Perempuan</option>
+        </select>
+      </div>
+      <div id="btnprofile">
+          <button id="SVProfile" onclick="saveProfileLocalOnly()">💾 sv Lokal</button>
+          <button id="SVProfile" onclick="saveProfile()">💾 sv server</button>
+          <button id="GProfile" onclick="getProfile()">💾 get server</button>
+      </div>
+    </div>
+  </main>
   </div>
-  
-  <div id="profile" class="profile-box">
-    <h3>👤 Profil</h3>
-
-    <div class="profile-field">
-      <label>Nama</label>
-      <input id="p_name" type="text" placeholder="Belum diisi">
-    </div>
-
-    <div class="profile-field">
-      <label>Status</label>
-      <input id="p_status" type="text" placeholder="Belum diisi">
-    </div>
-
-    <div class="profile-field">
-      <label>Hobi</label>
-      <input id="p_hobby" type="text" placeholder="Belum diisi">
-    </div>
-
-    <div class="profile-field">
-      <label>Umur</label>
-      <input id="p_age" type="number" placeholder="Belum diisi">
-    </div>
-
-    <div class="profile-field">
-      <label>Jenis Kelamin</label>
-      <select id="p_gender">
-        <option value="">Belum dipilih</option>
-        <option>Laki-laki</option>
-        <option>Perempuan</option>
-      </select>
-    </div>
-    <button id="SVProfile" onclick="saveProfile()">💾 Simpan Profil</button>
-  </div>
-</main>
-  </div>
-<script src="homepage.js?v4"></script>
+  <script>
+      const API = "https://4e5e4809-2156-449e-aa26-3e6605bbda59-00-tp0i6bl5yt5f.pike.replit.dev";
+  </script>
+  <script src="data.js"></script>
+  <script src="base.js"></script>
 </body>
 </html>
