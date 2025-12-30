@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>ᎶᎾℒⅅℰℕЅℋᎯℛᏦ</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="device-block">
+    <h2>website INI BISA DI AKSES KHUSUS HP</h2>
+    <p>Silakan buka website ini menggunakan smartphone atau matikan situs desktop</p>
+  </div>
+  <div id="app">
+    <header>
+  <div class="judul">GoldenShark</div>
+
+  <svg viewBox="0 0 1200 100" preserveAspectRatio="none" class="wave">  
+    <path d="M0,35
+      C200,55 400,15 600,35
+      800,55 1000,15 1200,35
+      L1200,100 L0,100 Z"/>
+  </svg>
+  <svg class="ship" viewBox="0 0 200 100" preserveAspectRatio="none">
+    <path d="M20 70 L160 70 L140 90 L40 90 Z"/>
+    <rect x="70" y="45" width="50" height="25" rx="4"/>
+    <rect x="95" y="30" width="10" height="15" rx="2"/>
+  </svg>
+  <svg class="cloud cloud-1" viewBox="0 0 120 60">
+      <ellipse cx="40" cy="35" rx="30" ry="18"/>
+      <ellipse cx="65" cy="25" rx="25" ry="20"/>
+      <ellipse cx="85" cy="35" rx="30" ry="18"/>
+  </svg>
+  <svg class="cloud cloud-2" viewBox="0 0 120 60">
+      <ellipse cx="40" cy="35" rx="30" ry="18"/>
+      <ellipse cx="65" cy="25" rx="25" ry="20"/>
+      <ellipse cx="85" cy="35" rx="30" ry="18"/>
+  </svg>
+  <svg class="cloud cloud-3" viewBox="0 0 120 60">
+      <ellipse cx="40" cy="35" rx="30" ry="18"/>
+      <ellipse cx="65" cy="25" rx="25" ry="20"/>
+      <ellipse cx="85" cy="35" rx="30" ry="18"/>
+  </svg>
+  <button class="containerm" type="submit"></button>
+</header>
+    <main class="ocean">
+
+    <div class="UIbawah">
+      <button class="ui-btn chat" onclick="toggleChat()">💬 OBROLAN</button>
+      <button class="ui-btn home" onclick="goHome()">🏠 RUMAH</button>
+      <button class="ui-btn profile" onclick="toggleProfile()">👤 PROFILE</button>
+    </div>
+
+    <div id="login">
+      <h3>Masukkan user</h3>
+      <input id="name" placeholder="user kamu">
+      <button onclick="login()">Masuk</button>
+      <p id="error"></p>
+    </div>
+
+    <div id="chat">
+      <div class="chat-box">
+
+        <ul id="messages"></ul>
+
+        <div class="send-box">
+          <input id="msg" placeholder="Ketik pesan...">
+          <button onclick="send()">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="profile" class="profile-box">
+      <h3>👤 Profil</h3>
+
+      <div class="profile-field">
+        <label>Nama</label>
+        <input id="p_name" type="text" placeholder="Belum diisi">
+      </div>
+
+      <div class="profile-field">
+        <label>Status</label>
+        <input id="p_setatus" type="text" placeholder="Belum diisi">
+      </div>
+      <div class="profile-field">
+        <label>Hobi</label>
+        <input id="p_hobby" type="text" placeholder="Belum diisi">
+      </div>
+
+      <div class="profile-field">
+        <label>Umur</label>
+        <input id="p_age" type="number" placeholder="Belum diisi">
+      </div>
+
+      <div class="profile-field">
+        <label>Jenis Kelamin</label>
+        <select id="p_gender">
+          <option value="">Belum dipilih</option>
+          <option>Laki-laki</option>
+          <option>Perempuan</option>
+        </select>
+      </div>
+      <div id="btnprofile">
+          <button id="SVProfile" onclick="saveProfileLocalOnly()">💾 sv Lokal</button>
+          <button id="SVProfile" onclick="saveProfile()">💾 sv server</button>
+          <button id="GProfile" onclick="getProfile()">💾 get server</button>
+      </div>
+    </div>
+  </main>
+  </div>
+  <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD1ov5494poj9d1homIMhUajAvTvuf2W9M",
+  authDomain: "notifikasi-website-goldenshark.firebaseapp.com",
+  projectId: "notifikasi-website-goldenshark",
+  messagingSenderId: "20732522648",
+  appId: "1:20732522648:web:cd18913a4f3636cdd6a0ed"
+};
+
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
+
+// REGISTER SERVICE WORKER
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register(
+  "/Gold/HOMEPAGE/firebase-messaging-sw.js"
+);
+}
+
+// REQUEST PERMISSION + TOKEN
+Notification.requestPermission().then(permission => {
+  alert("Permission: " + permission);
+
+  if (permission === "granted") {
+    getToken(messaging, {
+      vapidKey: "BBJHJdzjvyzGsGcZrWv2p91QVIBwpKhRmLLFrSfAxs6Wel5Mi2VE8hDbBEOdP4jFRCJpsYlCWybE4rLxYk4N92o"
+    }).then(token => {
+      alert("TOKEN:\n" + token);
+    }).catch(err => {
+      alert("TOKEN ERROR:\n" + err.message);
+    });
+  }
+});
+</script>
+
+<script>
+  const API = "https://4e5e4809-2156-449e-aa26-3e6605bbda59-00-tp0i6bl5yt5f.pike.replit.dev";
+</script>
+<script src="data.js"></script>
+<script src="base.js"></script>
+</body>
+</html>
