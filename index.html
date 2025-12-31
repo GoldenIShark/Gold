@@ -112,50 +112,6 @@
     </div>
   </main>
   </div>
-  <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging.js";
-
-const messaging = getMessaging();
-
-onMessage(messaging, (payload) => {
-  alert("🔔 PESAN MASUK:\n" + payload.notification.title);
-});
-
-const firebaseConfig = {
-  apiKey: "AIzaSyD1ov5494poj9d1homIMhUajAvTvuf2W9M",
-  authDomain: "notifikasi-website-goldenshark.firebaseapp.com",
-  projectId: "notifikasi-website-goldenshark",
-  messagingSenderId: "20732522648",
-  appId: "1:20732522648:web:cd18913a4f3636cdd6a0ed"
-};
-
-const app = initializeApp(firebaseConfig);
-const messaging = getMessaging(app);
-
-// REGISTER SERVICE WORKER
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register(
-  "firebase-messaging-sw.js"
-);
-}
-
-// REQUEST PERMISSION + TOKEN
-Notification.requestPermission().then(permission => {
-  alert("Permission: " + permission);
-
-  if (permission === "granted") {
-    getToken(messaging, {
-      vapidKey: "BBJHJdzjvyzGsGcZrWv2p91QVIBwpKhRmLLFrSfAxs6Wel5Mi2VE8hDbBEOdP4jFRCJpsYlCWybE4rLxYk4N92o"
-    }).then(token => {
-      alert("TOKEN:\n" + token);
-    }).catch(err => {
-      alert("TOKEN ERROR:\n" + err.message);
-    });
-  }
-});
-</script>
-
 <script>
   const API = "https://4e5e4809-2156-449e-aa26-3e6605bbda59-00-tp0i6bl5yt5f.pike.replit.dev";
 </script>
