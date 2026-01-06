@@ -36,7 +36,7 @@ function loadProfileLocal() {
 function loadProfileToForm() {
   const p = loadProfileLocal();
 
-  document.getElementById("p_name").value    = p.nama;
+  document.getElementById("p_nama").value    = p.nama;
   document.getElementById("p_age").value     = p.umur;
   document.getElementById("p_gender").value  = p.gender;
   document.getElementById("p_setatus").value = p.setatus;
@@ -47,7 +47,7 @@ function loadProfileToForm() {
 
 function saveProfileLocalOnly() {
   const data = {
-    nama:    document.getElementById("p_name").value,
+    nama:    document.getElementById("p_nama").value,
     umur:   document.getElementById("p_age").value,
     gender: document.getElementById("p_gender").value,
     setatus:document.getElementById("p_setatus").value,
@@ -59,14 +59,14 @@ function saveProfileLocalOnly() {
 }
 
 function saveProfile() {
-  const username = getCookie("NamaUser");
+  const username = getCookie("username");
   if (!username) {
     systemMessage("⚠️ User belum login");
     return;
   }
 
   const data = {
-    nama:    document.getElementById("p_name").value,
+    nama:    document.getElementById("p_nama").value,
     umur:   document.getElementById("p_age").value,
     gender: document.getElementById("p_gender").value,
     setatus:document.getElementById("p_setatus").value,
@@ -77,12 +77,12 @@ function saveProfile() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      namauser: username,
-      name: data.nama,
-      status: data.setatus,
-      hobi: data.hobi,
-      umur: data.umur,
-      gender: data.gender
+        username: username,
+        nama: data.nama,
+        setatus: data.setatus,
+        hobi: data.hobi,
+        umur: data.umur,
+        gender: data.gender
     })
   })
     .then(res => {
@@ -102,24 +102,23 @@ function saveProfile() {
 /* ================= PROFILE FROM SERVER ================= */
 
 function getProfile() {
-  const username = getCookie("NamaUser");
-  if (!username) return;
+    const username = getCookie("username");
+    if (!username) return;
 
-  fetch(API + "/identitas/" + username)
+    fetch(API + "/identitas/" + username)
     .then(res => {
-      if (!res.ok) throw new Error();
-      return res.json();
+        if (!res.ok) throw new Error();
+        return res.json();
     })
     .then(res => {
-      if (res.status !== "ok") return;
-
-      const d = {
-        nama: d = res.data.name,
-        umur: res.data.umur,
-        gender: res.data.gender,
-        setatus: res.data.status,
-        hobi: res.data.hobi
-      };
+        if (res.status !== "ok") return;
+            const d = {
+            nama: res.data.nama,
+            umur: res.data.umur,
+            gender: res.data.gender,
+            setatus: res.data.setatus,
+            hobi: res.data.hobi
+    };
 
       saveProfileLocal(d);
       loadProfileToForm();
@@ -128,7 +127,7 @@ function getProfile() {
       systemMessage("ℹ️ Profil dimuat dari server");
     })
     .catch(() => {
-      systemMessage("⚠️ Gagal mengambil profil (offline)");
+        systemMessage("⚠️ Gagal mengambil profil (offline)");
     });
 }
 
